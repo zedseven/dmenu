@@ -81,10 +81,12 @@ tokenize(char *source, const char *delim, int *llen) {
 
 static int
 arrayhas(char **list, int length, char *item) {
+	int itemlen = strlen(item);
 	for (int i = 0; i < length; i++) {
-		int len1 = strlen(list[i]);
-		int len2 = strlen(item);
-		if (fstrncmp(list[i], item, len1 > len2 ? len2 : len1) == 0)
+		int len = strlen(list[i]);
+		if (itemlen != len)
+			continue;
+		if (fstrncmp(list[i], item, len) == 0)
 			return 1;
 	}
 	return 0;
